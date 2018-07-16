@@ -8,7 +8,9 @@ virt-resize --expand /dev/sda1 rhel-server-7.5-x86_64-kvm.qcow2 appformix001.qco
 virt-customize -a appformix001.qcow2 --hostname appformix001 --timezone America/Los_Angeles \
         --run-command 'xfs_growfs /' --root-password password:test123! \
         --run-command 'sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config' \
-        --run-command 'systemctl enable sshd' --run-command 'yum remove -y cloud-init'   --selinux-relabel
+        --run-command 'systemctl enable sshd' --run-command 'yum remove -y cloud-init' 
+        --selinux-relabel
+
 #Create interface configuration, for controlplane, internal_api, external networks
 virt-customize -a appformix001.qcow2 --run-command 'cat << EOF /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
