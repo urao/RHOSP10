@@ -13,6 +13,8 @@ set -xv
 TEMPLATE_DIR=/home/tripleo-heat-templates/
 TEMPLATE_ENV_DIR=/home/tripleo-heat-templates/environments/
 
+source /home/stack/stackrc
+
 time openstack overcloud deploy --stack $STACK_NAME \
 	--templates $TEMPLATE_DIR \
 	-r $TEMPATE_ENV_DIR/contrail/roles_data.yaml \
