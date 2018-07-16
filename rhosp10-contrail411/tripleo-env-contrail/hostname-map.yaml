@@ -1,0 +1,17 @@
+parameter_defaults:
+  HostnameMap:
+    overcloud-controller-0: osp-controller-0
+    overcloud-contrailcontroller-0: contrail-controller-0
+    overcloud-contrailanalytics-0: contrail-analytics-0
+    overcloud-contrailanalyticsdatabase-0: contrail-analytics-database-0
+    overcloud-controller-1: osp-controller-1
+    overcloud-contrailcontroller-1: contrail-controller-1
+    overcloud-contrailanalytics-1: contrail-analytics-1
+    overcloud-contrailanalyticsdatabase-1: contrail-analytics-database-1
+    overcloud-controller-2: osp-controller-2
+    overcloud-contrailcontroller-2: contrail-controller-2
+    overcloud-contrailanalytics-2: contrail-analytics-2
+    overcloud-contrailanalyticsdatabase-2: contrail-analytics-database-2
+    overcloud-compute-0: compute-0
+    overcloud-compute-1: compute-1
+    overcloud-contraildpdk-0: contrail-dpdk-0

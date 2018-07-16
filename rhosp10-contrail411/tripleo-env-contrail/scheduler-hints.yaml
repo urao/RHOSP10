@@ -1,0 +1,15 @@
+parameter_defaults:
+    ControllerSchedulerHints:
+        'capabilities:node': 'osp-controller-%index%'
+    NovaComputeSchedulerHints:
+        'capabilities:node': 'compute-%index%'
+    ContrailControllerSchedulerHints:
+        'capabilities:node': 'contrail-controller-%index%'
+    ContrailAnalyticsSchedulerHints:
+        'capabilities:node': 'contrail-analytics-%index%'
+    ContrailAnalyticsDatabaseSchedulerHints:
+        'capabilities:node': 'contrail-analytics-database-%index%'
+    ContrailTsnSchedulerHints:
+        'capabilities:node': 'contrail-tsn-%index%'
+    ContrailDpdkSchedulerHints:
+        'capabilities:node': 'contrail-dpdk-%index%'

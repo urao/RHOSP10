@@ -1,0 +1,80 @@
+resource_registry:
+  OS::TripleO::Compute::Net::SoftwareConfig: contrail-nic-config-compute.yaml
+  OS::TripleO::Controller::Net::SoftwareConfig: contrail-nic-config-os-controller.yaml
+  OS::TripleO::ContrailController::Net::SoftwareConfig: contrail-nic-config.yaml
+  OS::TripleO::ContrailAnalytics::Net::SoftwareConfig: contrail-nic-config.yaml
+  OS::TripleO::ContrailAnalyticsDatabase::Net::SoftwareConfig: contrail-nic-config.yaml
+  OS::TripleO::ContrailTsn::Net::SoftwareConfig: contrail-nic-config-compute.yaml
+  OS::TripleO::ContrailDpdk::Net::SoftwareConfig: contrail-nic-config-compute-bond-vlan-dpdk.yaml
+
+parameter_defaults:
+## For Neutron port.
+  ManagementNetCidr: 12.18.250.0/27
+  ManagementNetworkVlanID: 23
+  ManagementAllocationPools: [{'start': '12.18.250.2', 'end': '12.18.250.30'}]
+  ExternalNetCidr: 12.18.250.32/27
+  ExternalNetworkVlanID: 26
+  ExternalAllocationPools: [{'start': '12.18.250.34', 'end': '12.18.250.62'}]
+  InternalApiNetCidr: 10.64.255.128/27
+  InternalApiNetworkVlanID: 12
+  InternalApiAllocationPools: [{'start': '10.64.255.130', 'end': '10.64.255.158'}]
+  TenantNetCidr: 10.64.255.160/27
+  TenantNetworkVlanID: 16
+  TenantAllocationPools: [{'start': '10.64.255.162', 'end': '10.64.255.190'}]
+  StorageMgmtNetCidr: 10.64.255.96/27
+  StorageMgmtNetworkVlanID: 29
+  StorageMgmtAllocationPools: [{'start': '10.64.255.98', 'end': '10.64.255.126'}]
+  StorageNetCidr: 12.168.135.0/23
+  StorageNetworkVlanID: 17
+  StorageAllocationPools: [{'start': '12.168.135.2', 'end': '12.168.135.99'}]
+## For interface in each instance
+  ControlPlaneSubnetCidr: '27'
+  ControlPlaneDefaultRoute: 10.64.255.194
+
+#  ExternalInterfaceDefaultRoute: 172.18.250.33
+  EC2MetadataIp: 10.64.255.194
+  DnsServers: ["10.64.255.194"]
+
+  TimeZone: 'America/Los_Angeles'
+  MTU: 9000
+
+  # vRouter kernel
+  VrouterPhysicalInterface: vlan16
+  VrouterGateway: 10.64.255.190
+  VrouterNetmask: 255.255.255.224
+  ControlVirtualInterface: vlan12
+  PublicVirtualInterface: vlan26
+## if PhysicalInterface is a vlan interface using vlanX notation
+  VlanParentInterface: bond0
+## if vhost0 is based on a bond
+  BondInterface: bond0
+  BondInterfaceMembers: enp129s0f1,enp129s0f0
+  BondMode: 4
+  BondPolicy: 1
+
+  #Tsn params
+#  VrouterTsnPhysicalInterface: eth1
+#  VlanTsnParentInterface: eth1
+#  BondTsnInterface: bond0
+#  BondTsnInterfaceMembers: eth0,eth1
+#  BondTsnMode: 4
+#  BondTsnPolicy: 1
+
+  #DPDK params
+  #VrouterDpdkPhysicalInterface: vlan160
+  #VrouterDpdkPhysicalInterface: bond0
+  #ContrailVrouterDpdkPhysicalInterface: bond0
+  #BondDpdkInterface: bond0
+  #ContrailBondDpdkInterface: bond0
+  #BondDpdkInterfaceMembers: enp175s0f1,enp175s0f0
+  #ContrailBondDpdkInterfaceMembers: enp175s0f1,enp175s0f0
+  #VlanDpdkParentInterface: bond0
+  #ContrailVlanDpdkParentInterface: bond0
+  #BondDpdkMode: 4
+  #BondDpdkPolicy: 1
+  #ContrailBondDpdkPolicy: 1
+  #ContrailDpdkHugePages: 2048
+  ##ContrailDpdkCoremask: 0xf
+  #ContrailDpdkDriver: uio_pci_generic
+  #BondInterfaceLinuxOptions: "mode=802.3ad lacp_rate=fast miimon=100 xmit_hash_policy=layer3+4"
+

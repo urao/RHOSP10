@@ -1,0 +1,213 @@
+# Environment file demonstrating how to pre-assign IPs to all node types
+resource_registry:
+  OS::TripleO::Controller::Ports::ExternalPort: ../../network/ports/external_from_pool.yaml
+  OS::TripleO::Controller::Ports::InternalApiPort: ../../network/ports/internal_api_from_pool.yaml
+  OS::TripleO::Controller::Ports::TenantPort: ../../network/ports/tenant_from_pool.yaml
+  OS::TripleO::Controller::Ports::StoragePort: ../../network/ports/storage_from_pool.yaml
+  OS::TripleO::Controller::Ports::StorageMgmtPort: ../../network/ports/storage_mgmt_from_pool.yaml
+  OS::TripleO::Controller::Ports::ManagementPort: ../../network/ports/management_from_pool.yaml
+
+  OS::TripleO::Compute::Ports::ExternalPort: ../../network/ports/external_from_pool.yaml
+  OS::TripleO::Compute::Ports::InternalApiPort: ../../network/ports/internal_api_from_pool.yaml
+  OS::TripleO::Compute::Ports::TenantPort: ../../network/ports/tenant_from_pool.yaml
+  #OS::TripleO::Compute::Ports::StoragePort: ../../network/ports/storage_from_pool.yaml
+  #OS::TripleO::Compute::Ports::StorageMgmtPort: ../../network/ports/noop.yaml
+  OS::TripleO::Compute::Ports::ManagementPort: ../../network/ports/management_from_pool.yaml
+
+  OS::TripleO::ContrailDpdk::Ports::ExternalPort: ../../network/ports/external_from_pool.yaml
+  OS::TripleO::ContrailDpdk::Ports::InternalApiPort: ../../network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ContrailDpdk::Ports::TenantPort: ../../network/ports/tenant_from_pool.yaml
+  OS::TripleO::ContrailDpdk::Ports::StoragePort: ../../network/ports/storage_from_pool.yaml
+  OS::TripleO::ContrailDpdk::Ports::StorageMgmtPort: ../../network/ports/storage_mgmt_from_pool.yaml
+  OS::TripleO::ContrailDpdk::Ports::ManagementPort: ../../network/ports/management_from_pool.yaml
+
+  OS::TripleO::ContrailController::Ports::ExternalPort: ../../network/ports/external_from_pool.yaml
+  OS::TripleO::ContrailController::Ports::InternalApiPort: ../../network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ContrailController::Ports::TenantPort: ../../network/ports/tenant_from_pool.yaml
+  OS::TripleO::ContrailController::Ports::ManagementPort: ../../network/ports/management_from_pool.yaml
+  #OS::TripleO::ContrailController::Ports::StoragePort: ../../network/ports/storage_from_pool.yaml
+  #OS::TripleO::ContrailController::Ports::StorageMgmtPort: ../../network/ports/noop.yaml
+
+  OS::TripleO::ContrailAnalytics::Ports::ExternalPort: ../../network/ports/external_from_pool.yaml
+  OS::TripleO::ContrailAnalytics::Ports::InternalApiPort: ../../network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ContrailAnalytics::Ports::TenantPort: ../../network/ports/tenant_from_pool.yaml
+  OS::TripleO::ContrailAnalytics::Ports::ManagementPort: ../../network/ports/management_from_pool.yaml
+  #OS::TripleO::ContrailAnalytics::Ports::StoragePort: ../../network/ports/storage_from_pool.yaml
+  #OS::TripleO::ContrailAnalytics::Ports::StorageMgmtPort: ../../network/ports/noop.yaml
+
+  OS::TripleO::ContrailAnalyticsDatabase::Ports::ExternalPort: ../../network/ports/external_from_pool.yaml
+  OS::TripleO::ContrailAnalyticsDatabase::Ports::InternalApiPort: ../../network/ports/internal_api_from_pool.yaml
+  OS::TripleO::ContrailAnalyticsDatabase::Ports::TenantPort: ../../network/ports/tenant_from_pool.yaml
+  OS::TripleO::ContrailAnalyticsDatabase::Ports::ManagementPort: ../../network/ports/management_from_pool.yaml
+  #OS::TripleO::ContrailAnalyticsDatabase::Ports::StoragePort: ../../network/ports/storage_from_pool.yaml
+  #OS::TripleO::ContrailAnalyticsDatabase::Ports::StorageMgmtPort: ../../network/ports/noop.yaml
+
+  OS::TripleO::ContrailTsn::Ports::InternalApiPort: ../../network/ports/internal_api_from_pool.yaml
+
+  #OS::TripleO::CephStorage::Ports::ExternalPort: ../../network/ports/noop.yaml
+  #OS::TripleO::CephStorage::Ports::InternalApiPort: ../../network/ports/noop.yaml
+  #OS::TripleO::CephStorage::Ports::StoragePort: ../../network/ports/storage_from_pool.yaml
+  #OS::TripleO::CephStorage::Ports::StorageMgmtPort: ../../network/ports/storage_mgmt_from_pool.yaml
+  #OS::TripleO::CephStorage::Ports::TenantPort: ../../network/ports/noop.yaml
+  #OS::TripleO::CephStorage::Ports::ManagementPort: ../../network/ports/management_from_pool.yaml
+
+  #OS::TripleO::SwiftStorage::Ports::ExternalPort: ../../network/ports/noop.yaml
+  #OS::TripleO::SwiftStorage::Ports::InternalApiPort: ../../network/ports/internal_api_from_pool.yaml
+  #OS::TripleO::SwiftStorage::Ports::StoragePort: ../../network/ports/storage_from_pool.yaml
+  #OS::TripleO::SwiftStorage::Ports::StorageMgmtPort: ../../network/ports/storage_mgmt_from_pool.yaml
+  #OS::TripleO::SwiftStorage::Ports::TenantPort: ../../network/ports/noop.yaml
+  #OS::TripleO::SwiftStorage::Ports::ManagementPort: ../../network/ports/management_from_pool.yaml
+
+  #OS::TripleO::BlockStorage::Ports::ExternalPort: ../../network/ports/noop.yaml
+  #OS::TripleO::BlockStorage::Ports::InternalApiPort: ../../network/ports/internal_api_from_pool.yaml
+  #OS::TripleO::BlockStorage::Ports::StoragePort: ../../network/ports/storage_from_pool.yaml
+  #OS::TripleO::BlockStorage::Ports::StorageMgmtPort: ../../network/ports/storage_mgmt_from_pool.yaml
+  #OS::TripleO::BlockStorage::Ports::TenantPort: ../../network/ports/noop.yaml
+  #OS::TripleO::BlockStorage::Ports::ManagementPort: ../../network/ports/management_from_pool.yaml
+
+parameter_defaults:
+  ControlFixedIPs:
+    - ip_address: 10.64.255.222
+  PublicVirtualFixedIPs:
+    - ip_address: 12.18.250.62
+  InternalApiVirtualFixedIPs:
+    - ip_address: 10.64.255.158
+  RedisVirtualFixedIPs:
+    - ip_address: 10.64.255.157
+  StorageVirtualFixedIPs:
+    - ip_address: 12.168.135.100
+  StorageMgmtVirtualFixedIPs:
+    - ip_address: 10.64.255.126
+  ControllerIPs:
+    management:
+    - 12.18.250.11
+    - 12.18.250.12
+    - 12.18.250.13
+    internal_api:
+    - 10.64.255.129
+    - 10.64.255.130
+    - 10.64.255.131
+    external:
+    - 12.18.250.36
+    - 12.18.250.37
+    - 12.18.250.35
+    tenant:
+    - 10.64.255.161
+    - 10.64.255.162
+    - 10.64.255.163
+    storage:
+    - 12.168.135.11
+    - 12.168.135.12
+    - 12.168.135.13
+    storage_mgmt:
+    - 10.64.255.101
+    - 10.64.255.102
+    - 10.64.255.103
+  ContrailControllerIPs:
+    management:
+    - 12.18.250.14
+    - 12.18.250.15
+    - 12.18.250.16
+    internal_api:
+    - 10.64.255.132
+    - 10.64.255.133
+    - 10.64.255.134
+    external:
+    - 12.18.250.39
+    - 12.18.250.40
+    - 12.18.250.41
+    tenant:
+    - 10.64.255.164
+    - 10.64.255.165
+    - 10.64.255.166
+  ContrailAnalyticsIPs:
+    management:
+    - 12.18.250.17
+    - 12.18.250.18
+    - 12.18.250.19
+    internal_api:
+    - 10.64.255.135
+    - 10.64.255.136
+    - 10.64.255.137
+    external:
+    - 12.18.250.42
+    - 12.18.250.43
+    - 12.18.250.44
+    tenant:
+    - 10.64.255.167
+    - 10.64.255.168
+    - 10.64.255.169
+  ContrailAnalyticsDatabaseIPs:
+    management:
+    - 12.18.250.20
+    - 12.18.250.21
+    - 12.18.250.22
+    internal_api:
+    - 10.64.255.138
+    - 10.64.255.139
+    - 10.64.255.140
+    external:
+    - 12.18.250.45
+    - 12.18.250.46
+    - 12.18.250.47
+    tenant:
+    - 10.64.255.170
+    - 10.64.255.171
+    - 10.64.255.172
+  NovaComputeIPs:
+    management:
+    - 12.18.250.23
+    internal_api:
+    - 10.64.255.141
+    external:
+    - 12.18.250.48
+    tenant:
+    - 10.64.255.173
+    storage:
+    - 12.168.135.14
+    storage_mgmt:
+    - 10.64.255.104
+  ContrailTsnIPs:
+    internal_api:
+    - 10.0.0.70
+  ContrailDpdkIPs:
+    management:
+    - 12.18.250.23
+    internal_api:
+    - 10.64.255.141
+    external:
+    - 12.18.250.48
+    tenant:
+    - 10.64.255.173
+    storage:
+    - 12.168.135.14
+    storage_mgmt:
+    - 10.64.255.104
+  #CephStorageIPs:
+    # Each ceph node will get an IP from the lists below, first node, first IP
+    #storage:
+    #- 172.16.1.253
+    #storage_mgmt:
+    #- 172.16.3.253
+    #management:
+    #- 172.16.4.253
+  #SwiftStorageIPs:
+    # Each swift node will get an IP from the lists below, first node, first IP
+    #internal_api:
+    #- 172.16.2.254
+    #storage:
+    #- 172.16.1.254
+    #storage_mgmt:
+    #- 172.16.3.254
+    ##management:
+    #- 172.16.4.254
+  #BlockStorageIPs:
+    # Each cinder node will get an IP from the lists below, first node, first IP
+    #internal_api:
+    #- 172.16.2.250
+    #storage:
+    #- 172.16.1.250
+    #storage_mgmt:
+    #- 172.16.3.250
+    #management:
+    #- 172.16.4.250
