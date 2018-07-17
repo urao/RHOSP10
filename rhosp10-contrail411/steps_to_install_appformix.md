@@ -1,6 +1,6 @@
 ### Steps to create Appformix VM's in RHOSP10+Contrail 4.1.1 Environment
 
-#### Steps to run on undercloud VM
+1. Execute on the host on which you want to create Appformix VM
 ```
 export LIBGUESTFS_BACKEND=direct
 qemu-img create -f qcow2 -o preallocation=metadata appformix001.qcow2 100G
@@ -29,7 +29,19 @@ virt-install --ram 32768 --vcpus 4 --os-variant rhel7 \
 virsh define /tmp/appformix001.xml 
 virsh start appformix001
 ```
-If the deployment is behind proxy, set environment variables with IP:port information
+2. After VM boots up, set environment variables http_proxy and https_proxy with IP:port information if overcloud
+   deployment is behind proxy
 ```
 export http_proxy=http://<IP>:Port
+```
+3. Do RHEL subscription
+```
+subscription-manager register --username <user_name> --password <password>
+sudo subscription-manager attach --pool=<pool_id>
+sudo subscription-manager repos --disable=*
+sudo subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-7-server-extras-rpms --enable=rhel-7-server-rh-common-rpms --enable=rhel-ha-for-rhel-7-server-rpms --enable=rhel-7-server-openstack-10-rpms --enable=rhel-7-server-openstack-10-devtools-rpms
+```
+4. Install required packages
+```
+rpm -Uvh --replacepkgs https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 ```
