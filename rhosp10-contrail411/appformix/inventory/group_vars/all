@@ -13,7 +13,7 @@ openstack_plaform_enabled: true
 
 appformix_plugins: '{{ appformix_contrail_factory_plugins }} + {{ appformix_openstack_factory_plugins }} + {{ appformix_application_factory_plugins }}'
 
-http_proxy_url: "http://192.168.1.1:8003"
+http_proxy_url: "http://192.168.100.10:8003"
 prerequisites_env:
     http_proxy: '{{ http_proxy_url }}'
     https_proxy: '{{ http_proxy_url }}'
