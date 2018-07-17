@@ -1,0 +1,11 @@
+[compute]
+# internal_api subnet IP
+190.164.25.141    ansible_ssh_user=heat-admin  
+
+[appformix_controller]
+172.118.25.50    ansible_ssh_user=root
+
+[openstack_controller]
+190.164.25.129    ansible_ssh_user=heat-admin
+190.164.25.130    ansible_ssh_user=heat-admin
+190.164.25.131    ansible_ssh_user=heat-admin

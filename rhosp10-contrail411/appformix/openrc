@@ -1,0 +1,7 @@
+export OS_USERNAME=admin
+export OS_AUTH_URL=http://192.18.50.62:5000/v3
+export OS_PASSWORD=m4XdhwUYWQdT4W
+export OS_IDENTITY_API_VERSION=3
+export OS_PROJECT_NAME=admin
+export OS_IMAGE_API_VERSION=2
+export OS_NO_CACHE=1
