@@ -76,8 +76,8 @@ copy overcloudrc file from undercloud VM on to this VM ~/
 egrep 'OS_PASSWORD|OS_AUTH_URL|OS_USERNAME|OS_IDENTITY_API_VERSION' overcloudrc > ~/openrc
 echo 'export OS_TENANT_NAME=admin' >> ~/openrc
 source ~/openrc
-ansible-playbook -i inventory/ appformix_openstack.yml  
-ansible-playbook -i inventory/ appformix_openstack_ha.yml   <======== Appformix in HA cluster
+ansible-playbook -i ~/inventory/ appformix_openstack.yml  
+ansible-playbook -i ~/inventory/ appformix_openstack_ha.yml   <======== Appformix in HA cluster
 ```
 8. Access Appformix UI
 ```
@@ -86,5 +86,5 @@ http://<external_ip>:9000
 8. Cleanup Appformix install
 ```
 cd appformix-2.15.3
-ansible-playbook -i inventory/ clean_appformix_openstack.yml  
+ansible-playbook -i ~/inventory/ clean_appformix_openstack.yml  
 ```
