@@ -48,7 +48,7 @@ sudo yum install -y python-pip python-devel
 sudo yum groupinstall 'Development Tools'
 pip install ansible==2.3 markupsafe httplib2
 ```
-5. Download appformix packages and license file under images folder
+5. Download [appformix packages](https://www.juniper.net/support/downloads/?p=appformix) and copy license file under images folder
 ```
 mkdir ~/images
 appformix-platform-images-2.15.3.tar.gz
