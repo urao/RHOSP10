@@ -57,8 +57,7 @@ appformix-2.15.3.tar.gz
 appformix-dependencies-images-2.15.3.tar.gz packages
 appformix-openstack-images-2.15.3.tar.gz
 ```
-6. Create inventory files
-    ##### Check the sample inventory folder [here](https://github.com/urao/RHOSP/tree/master/rhosp10-contrail411/appformix/inventory)
+6. Create inventory files (sample [here](https://github.com/urao/RHOSP/tree/master/rhosp10-contrail411/appformix/inventory))
 ```
 mkdir ~/inventory/
 mkdir ~/inventory/group_vars/
