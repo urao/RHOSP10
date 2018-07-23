@@ -54,7 +54,7 @@ mkdir ~/images
 appformix-platform-images-2.15.3.tar.gz
 appformix-2.15.3-license.sig
 appformix-2.15.3.tar.gz
-appformix-dependencies-images-2.15.3.tar.gz packages
+appformix-dependencies-images-2.15.3.tar.gz
 appformix-openstack-images-2.15.3.tar.gz
 ```
 6. Create inventory files (sample [here](https://github.com/urao/RHOSP/tree/master/rhosp10-contrail411/appformix/inventory))
