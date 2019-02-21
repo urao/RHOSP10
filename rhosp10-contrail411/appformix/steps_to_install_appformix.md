@@ -48,18 +48,17 @@ sudo yum install -y python-pip python-devel
 sudo yum groupinstall 'Development Tools'
 pip install ansible==2.3 markupsafe httplib2
 ```
-5. Download appformix packages and license file under images folder
+5. Download [appformix packages](https://www.juniper.net/support/downloads/?p=appformix) and copy license file under images folder
 ```
 mkdir ~/images
 appformix-platform-images-2.15.3.tar.gz
 appformix-2.15.3-license.sig
 appformix-2.15.3.tar.gz
-appformix-dependencies-images-2.15.3.tar.gz packages
+appformix-dependencies-images-2.15.3.tar.gz
 appformix-openstack-images-2.15.3.tar.gz
 ```
-6. Create inventory files
+6. Create inventory files (sample [here](https://github.com/urao/RHOSP/tree/master/rhosp10-contrail411/appformix/inventory))
 ```
-# Check the sample inventory folder [here]()
 mkdir ~/inventory/
 mkdir ~/inventory/group_vars/
 touch ~/inventory/hosts
@@ -76,8 +75,8 @@ copy overcloudrc file from undercloud VM on to this VM ~/
 egrep 'OS_PASSWORD|OS_AUTH_URL|OS_USERNAME|OS_IDENTITY_API_VERSION' overcloudrc > ~/openrc
 echo 'export OS_TENANT_NAME=admin' >> ~/openrc
 source ~/openrc
-ansible-playbook -i inventory/ appformix_openstack.yml  
-ansible-playbook -i inventory/ appformix_openstack_ha.yml   <======== Appformix in HA cluster
+ansible-playbook -i ~/inventory/ appformix_openstack.yml  
+ansible-playbook -i ~/inventory/ appformix_openstack_ha.yml   <======== Appformix in HA cluster
 ```
 8. Access Appformix UI
 ```
@@ -86,5 +85,5 @@ http://<external_ip>:9000
 8. Cleanup Appformix install
 ```
 cd appformix-2.15.3
-ansible-playbook -i inventory/ clean_appformix_openstack.yml  
+ansible-playbook -i ~/inventory/ clean_appformix_openstack.yml  
 ```

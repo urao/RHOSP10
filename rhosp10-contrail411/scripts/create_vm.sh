@@ -13,7 +13,7 @@ echo "Install wget packages"
 yum install -y wget
 cd /home/stack/images/
 wget http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img
-openstack image create "cirros" --disk-format qcow2 --container-format bare --public --file /home/stack/images/cirros-0.4.0-i386-disk.img 
+openstack image create "cirros" --disk-format qcow2 --container-format bare --public --file /home/stack/images/cirros-0.4.0-x86_64-disk.img
 
 
 source $OVERCLOUD_RC
