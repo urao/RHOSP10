@@ -31,6 +31,7 @@ install_pkgs() {
 		yum install bridge-utils -y
 		curl https://bootstrap.pypa.io/get-pip.py | python
                 pip install os-net-config
+		sudo /usr/share/openvswitch/scripts/ovs-ctl start
 	else 
                 echo "Installing pkgs on RedHat"
 		check_args
@@ -45,6 +46,7 @@ install_pkgs() {
                 yum install -y python-pip
                 pip install os-net-config
 		yum install bridge-utils -y
+		sudo /usr/share/openvswitch/scripts/ovs-ctl start
 	fi
 }
 
