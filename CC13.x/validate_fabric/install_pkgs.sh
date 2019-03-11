@@ -38,7 +38,7 @@ install_pkgs() {
 		subscription-manager register --username $username --password $password
                 subscription-manager attach --pool=$poolId
                 subscription-manager repos --disable="*"
-         subscription-manager repos --enable rhel-7-server-rpms --enable rhel-7-server-extras-rpms --enable rhel-7-server-rh-common-rpms --enable rhel-ha-for-rhel-7-server-rpms
+                subscription-manager repos --enable rhel-7-server-rpms --enable rhel-7-server-extras-rpms --enable rhel-7-server-rh-common-rpms --enable rhel-ha-for-rhel-7-server-rpms
                 subscription-manager repos --enable rhel-7-server-openstack-13-rpms --enable rhel-7-server-openstack-13-devtools-rpms --enable rhel-7-server-rhceph-3-tools-rpms
                 subscription-manager refresh
                 yum update -y
