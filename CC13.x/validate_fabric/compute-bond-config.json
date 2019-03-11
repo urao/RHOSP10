@@ -1,0 +1,86 @@
+{
+    "network_config": [
+        {
+            "addresses": [
+                {
+                    "ip_netmask": "192.168.155.86/24"
+                }
+            ],
+            "dns_servers": [
+                "172.21.200.60",
+                "8.8.8.8"
+            ],
+            "mtu": 1500,
+            "name": "enp3s0f1",
+            "type": "interface",
+            "use_dhcp": false
+        },
+        {
+            "bonding_options": "mode=802.3ad xmit_hash_policy=layer3+4 lacp_rate=fast updelay=1000 miimon=100",
+            "members": [
+                {
+                    "name": "enp129s0f0",
+                    "primary": true,
+                    "type": "interface"
+                },
+                {
+                    "name": "enp129s0f1",
+                    "type": "interface"
+                }
+            ],
+            "name": "bond0",
+            "type": "linux_bond",
+            "use_dhcp": false
+        },
+        {
+            "addresses": [
+                {
+                    "ip_netmask": "192.168.160.132/24"
+                }
+            ],
+            "device": "bond0",
+            "mtu": 1500,
+            "type": "vlan",
+            "vlan_id": 212
+        },
+        {
+            "addresses": [
+                {
+                    "ip_netmask": "192.168.160.132/24"
+                }
+            ],
+            "device": "bond0",
+            "mtu": 1500,
+            "type": "vlan",
+            "vlan_id": 220
+        },
+        {
+            "bonding_options": "mode=802.3ad xmit_hash_policy=layer3+4 lacp_rate=fast updelay=1000 miimon=100",
+            "members": [
+                {
+                    "name": "enp129s0f2",
+                    "primary": true,
+                    "type": "interface"
+                },
+                {
+                    "name": "enp129s0f3",
+                    "type": "interface"
+                }
+            ],
+            "name": "bond1",
+            "type": "linux_bond",
+            "use_dhcp": false
+        },
+        {
+            "addresses": [
+                {
+                    "ip_netmask": "192.168.225.132/24"
+                }
+            ],
+            "device": "bond1",
+            "mtu": 1500,
+            "type": "vlan",
+            "vlan_id": 211
+        }
+    ]
+}

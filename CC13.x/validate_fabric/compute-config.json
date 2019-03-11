@@ -1,5 +1,6 @@
 {
     "network_config": [
+	#control plane address
         {
             "addresses": [
                 {
@@ -12,16 +13,6 @@
             ],
             "mtu": 1500,
             "name": "enp3s0f1",
-            "routes": [
-                {
-                    "ip_netmask": "169.254.169.254/32",
-                    "next_hop": "192.168.213.1"
-                },
-                {
-                    "default": true,
-                    "next_hop": "192.168.213.1"
-                }
-            ],
             "type": "interface",
             "use_dhcp": false
         },
@@ -31,6 +22,7 @@
             "use_dhcp": false
         },
         {
+	#internal_api network address
             "addresses": [
                 {
                     "ip_netmask": "172.16.0.132/24"
@@ -41,6 +33,7 @@
             "type": "vlan",
             "vlan_id": 201
         },
+	#storage network address
         {
             "addresses": [
                 {
@@ -52,6 +45,7 @@
             "type": "vlan",
             "vlan_id": 203
         },
+	#tenant network address
         {
             "name": "enp129s0f1",
             "type": "interface",

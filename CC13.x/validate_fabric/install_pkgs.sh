@@ -28,6 +28,7 @@ install_pkgs() {
 		yum clean all 
 		yum update -y 
 		yum install openvswitch -y
+		yum install bridge-utils -y
 		curl https://bootstrap.pypa.io/get-pip.py | python
                 pip install os-net-config
 	else 
@@ -43,6 +44,7 @@ install_pkgs() {
                 yum install openvswitch -y
                 yum install -y python-pip
                 pip install os-net-config
+		yum install bridge-utils -y
 	fi
 }
 
