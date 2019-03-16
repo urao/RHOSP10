@@ -1,0 +1,39 @@
+# Copyright 2018 Juniper Networks, Inc. All rights reserved.
+# Licensed under the Juniper Networks Script Software License (the "License").
+# You may not use this script file except in compliance with the License, which is located at
+# http://www.juniper.net/support/legal/scriptlicense/
+# Unless required by applicable law or otherwise agreed to in writing by the parties,
+# software distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#
+#
+#
+
+# Each list item contains:
+#    name: name of a node in the inventory (string)
+#    profile: name of hardware profile, group of servers (string)
+#    leaf: leaf name (string)
+
+# List of nodes to use as compute role using Contrail DPDK vRouter
+compute_nodes_dpdk:
+  - name: compute001
+  #- name: computedpdk1
+    #leaf: '0'
+    #profile: hw2
+  #- name: computedpdk2
+    #leaf: '1'
+    #profile: hw3
+#
+# List of nodes to use as compute role using Sriov
+compute_nodes_sriov:
+  #- name: computesriov1
+    #leaf: '0'
+    #profile: hw4
+  #- name: computesriov2
+    #leaf: '1'
+    #profile: hw5
+
+# List of nodes to use as compute role using Contrail kernel vRouter
+compute_nodes_kernel:
+  #- name: compute-kernel-001
+  #- name: compute001

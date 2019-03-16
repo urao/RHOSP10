@@ -1,0 +1,329 @@
+#urao
+global:
+  # List of DNS nameservers 
+  dns:
+    - "172.21.200.60"
+    - "10.84.5.100"
+    - "8.8.8.8"
+  # List of NTP time servers 
+  ntp:
+    - "66.129.233.81"
+  # Timezone for all servers
+  timezone: 'America/Los_Angeles'
+  rhel:
+    # Contrail Cloud Activation Key
+    satellite:
+      #SATELLITE_KEY should be defined in vault-data.yml file
+      key: "ak_lab_talharbash"
+      #SATELLITE_ORG
+      organization: "ContrailCloudNFR"
+      #SATELLITE_FQDN
+      fqdn: contrail-cloud-satellite.juniper.net
+  # DNS domain information. 
+  # Must be unique for every deployment to avoid name conflicts
+  domain: "urao.englab.juniper.net"
+
+jumphost:
+  network:
+    provision:
+      # jumphost nic to be used for provisioning (PXE booting) servers
+      nic: enp3s0f1
+
+#urao
+control_hosts:
+  #control_host_user
+  user: cloud-user
+  neutron:
+    #neutron_provision_network
+    provision_network: "ctlplane"
+  storage:
+    spinning_storage:
+      type: logical
+      disk:
+        - "/dev/sdb"
+        - "/dev/sdc"
+#        - "/dev/sdd"
+#        - "/dev/sde"
+#    ssd_storage:
+#      type: logical
+#      disk:
+#        - "/dev/sdf"
+#    default_dir_pool:
+#     type: dir
+  vm:
+    control:
+      cpu: 8
+      memory: 24
+      disk:
+        vda:
+          size: 100
+          pool: spinning_storage
+    contrail-controller:
+      cpu: 8
+      memory: 24
+      disk:
+        vda:
+          size: 100
+          pool: spinning_storage
+    contrail-analytics:
+      cpu: 8
+      memory: 24
+      disk:
+        vda:
+          size: 100
+          pool: spinning_storage
+    contrail-analytics-database:
+      cpu: 8
+      memory: 24
+      disk:
+        vda:
+          size: 100
+          pool: spinning_storage
+        #cassandra
+        vdb:
+          size: 100
+          pool: spinning_storage
+        #journaling recommends SSDs
+        vdc:
+          size: 500
+          pool: spinning_storage
+    appformix-controller:
+      cpu: 8
+      memory: 24
+      disk:
+        vda:
+          size: 100
+          pool: spinning_storage
+
+  # Contains a list of label to disk mappings for roles
+  disk_mapping:
+    # the control host always uses the "baremetal" role
+    baremetal:
+      # Mapping of labels to disk devices. The label is assigned to the disk 
+      # device so that the disk can be referenced by the alias in other 
+      # configurations. for example /dev/disk/by-alias/<label>
+      # Each list element contains:
+      #   label: label to assign
+      #   name: disk device path
+      - label: spinning-0
+        name: /dev/sdb
+      - label: spinning-1
+        name: /dev/sdc
+      #- label: spinning-2
+        #name: /dev/sdd
+      #- label: spinning-3
+        #name: /dev/sde
+      #- label: ssd-0
+        #name: /dev/sdf
+
+
+compute_hosts:
+  dpdk:
+    enabled: true
+
+  sriov:
+    #enable sriov support
+    enabled: false
+    #enable sriov with dpdk
+    # Contrail vrouter mode:
+    #   supported values are: dpdk or anything else means kernel vRouter
+    mode: dpdk1
+    #Sriov NumVFs separated by comma
+    num_vf:
+      - "enp129s0f1:8"
+    #NovaPCIPassthrough settings
+    pci_passthrough:
+      - devname: "enp129s0f1"
+        physical_network: "sriovnet1"
+
+overcloud:
+  extra_config:
+    CephIPv6: True
+    ContrailDpdkOptions: "--vr_flow_entries=2000000 --vr_mempool_sz 131072 --dpdk_txd_sz 2048 --dpdk_rxd_sz 2048"
+    NovaSchedulerDefaultFilters:
+      - RetryFilter
+      - AvailabilityZoneFilter
+      - RamFilter
+      - DiskFilter
+      - ComputeFilter
+      - ComputeCapabilitiesFilter
+      - ImagePropertiesFilter
+      - ServerGroupAntiAffinityFilter
+      - ServerGroupAffinityFilter
+      - AggregateInstanceExtraSpecsFilter
+      - NUMATopologyFilter
+  contrail:
+    aaa_mode: "rbac"
+    vrouter:
+      #VrouterGateway
+      dpdk:
+        #ContrailDpdkDriver
+        driver: uio_pci_generic
+        huge_pages:
+          two_mb: 128
+          one_gb: 100
+
+  # Contains a list of label to disk mappings for roles
+  disk_mapping:
+    compute:
+      # Mapping of labels to disk devices. The label is assigned to the disk 
+      # device so that the disk can be referenced by the alias in other 
+      # configurations. for example /dev/disk/by-alias/<label>
+      # Each list element contains:
+      #   label: label to assign
+      #   hctl: disk device path H:C:T:L. see lsscsi
+      - label: ephemeral-0
+        hctl: '5:0:0:0'
+      - label: ephemeral-1
+        hctl: '6:0:0:0'
+      - label: ephemeral-2
+        hctl: '7:0:0:0'
+      - label: ephemeral-3
+        hctl: '8:0:0:0'
+    compute-dpdk:
+      # Mapping of labels to disk devices. The label is assigned to the disk 
+      # device so that the disk can be referenced by the alias in other 
+      # configurations. for example /dev/disk/by-alias/<label>
+      # Each list element contains:
+      #   label: label to assign
+      #   hctl: disk device path H:C:T:L. see lsscsi
+      - label: ephemeral-0
+        hctl: '5:0:0:0'
+      - label: ephemeral-1
+        hctl: '6:0:0:0'
+      - label: ephemeral-2
+        hctl: '7:0:0:0'
+      - label: ephemeral-3
+        hctl: '8:0:0:0'
+    compute-sriov:
+      # Mapping of labels to disk devices. The label is assigned to the disk 
+      # device so that the disk can be referenced by the alias in other 
+      # configurations. for example /dev/disk/by-alias/<label>
+      # Each list element contains:
+      #   label: label to assign
+      #   hctl: disk device path H:C:T:L. see lsscsi
+      - label: ephemeral-0
+        hctl: '5:0:0:0'
+      - label: ephemeral-1
+        hctl: '6:0:0:0'
+      - label: ephemeral-2
+        hctl: '7:0:0:0'
+      - label: ephemeral-3
+        hctl: '8:0:0:0'
+    ceph-storage:
+      # Mapping of labels to disk devices. The label is assigned to the disk 
+      # device so that the disk can be referenced by the alias in other 
+      # configurations. for example /dev/disk/by-alias/<label>
+      # Each list element contains:
+      #   label: label to assign
+      #   hctl: disk device path H:C:T:L. see lsscsi
+      - label: osd-0
+        hctl: '0:2:1:0'
+      - label: osd-1
+        hctl: '0:2:2:0'
+      - label: osd-2
+        hctl: '0:2:3:0'
+      - label: journal-0
+        hctl: '0:2:2:0'
+  network:
+    # The external network is used for referencing the overcloud APIs from outside the infrastructure.
+    external:
+      vlan: 200
+      mtu: 1500
+      ipv6_enable: true
+      supernet: "fd00:fd00:fd00:3000::/60"
+      cidr: "fd00:fd00:fd00:3001::/64"
+      default_route: fd00:fd00:fd00:3001::1
+      vip: "fd00:fd00:fd00:3001::15"
+      pool:
+        start: fd00:fd00:fd00:3001::10
+        end: fd00:fd00:fd00:3001:ffff:ffff:ffff:fffe
+    storage:
+      vlan: 203
+      mtu: 1500
+      ipv6_enable: true
+      cidr: "2aaa::/64"
+      pool:
+        start: 2aaa::1
+        end: 2aaa:0000:0000:0000:ffff:ffff:ffff:fffe
+    storage_mgmt:
+      vlan: 204
+      mtu: 1500
+      ipv6_enable: true
+      cidr: "3aaa::/64"
+      pool:
+        start: 3aaa::1
+        end: 3aaa:0000:0000:0000:ffff:ffff:ffff:fffe
+    #external:
+      #cidr: "10.187.5.0/24"
+      #default_route: "10.187.5.1"
+      #vlan: 200
+      #vip: "10.187.5.70"
+      #pool:
+        #start: "10.187.5.51"
+        #end: "10.187.5.70"
+      #mtu: 1500
+    # The internal API network is used for control plane signalling and service API calls
+    internal_api:
+      # VLAN tag for the internal API network
+      # Corresponds to the InternalApiNetworkVlanID heat property
+      vlan: 201
+    # The tenant network is used for tenant workload data
+    tenant:
+      # VLAN tag for the tenant network
+      # Corresponds to the TenantNetworkVlanID heat property
+      vlan: 202
+    # The storage network is used for compute storage access
+    #storage:
+      #vlan: 203
+    # The storage management network is used for storage operations such as replication
+    #storage_mgmt:
+      #vlan: 204
+    # The management network is used for misc access such as SSH, and monitoring
+    management:
+      # VLAN tag for the management network
+      # Corresponds to the ManagementNetworkVlanID heat property
+      vlan: 205
+  # Information used to generate the SSL certificates for the Openstack service APIs
+  tls:
+    #countryName_default
+    country: "US"
+    #stateOrProvinceName_default
+    state: "CA"
+    #localityName_default
+    city: "Sunnyvale"
+    #organizationalUnitName_default
+    organization: "JNPR"
+    #commonName_default
+    #common_name: "10.187.5.70"
+    common_name: "fd00:fd00:fd00:3001::15"
+
+ceph:
+  # Choice to enable Ceph storage in the overcloud.  
+  # "true" means that Ceph will be deployed as the backed for Cinder and Glance services.  
+  # "false" false means that Ceph will not be deployed.
+  enabled: true
+  # Ceph OSD disk configuration
+  osd:
+    # Update the Ceph crush map when OSDs are started
+    crush_update_on_start: true
+    # Size for OSD journal files.
+    journal_size: 2048
+    # Ceph OSD disk assignments. The named disks will be exclusively used by Ceph for persistence.
+    # For each disk, a "journal" can be configured.  journals can be shared between OSDs.
+    #    journal: '/dev/disk/by-alias/journal-0'
+    dmcrypt: true
+    disk:
+      '/dev/sdb':
+      '/dev/sdc':
+      #'/dev/sdd':
+      #'/dev/sde':
+      #'osd-0':
+
+#appformix:
+  # Floating virtual IP for the Appformix APIs on the external network
+  # Only set this when you have multiple control hosts which allows Apformix to run in HA mode
+  #vip: "10.87.4.187"
+  #secondary_vip: "172.16.0.89"
+  #keepalived:
+  #  secondary_vrrp_interface: "vlan226"

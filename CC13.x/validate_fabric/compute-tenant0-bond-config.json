@@ -46,7 +46,7 @@
         {
             "addresses": [
                 {
-                    "ip_netmask": "192.168.160.132/24"
+                    "ip_netmask": "2607:f798:f:5::10/64"
                 }
             ],
             "device": "bond0",

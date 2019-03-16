@@ -1,0 +1,71 @@
+# Copyright 2018 Juniper Networks, Inc. All rights reserved.
+# Licensed under the Juniper Networks Script Software License (the "License").
+# You may not use this script file except in compliance with the License, which is located at
+# http://www.juniper.net/support/legal/scriptlicense/
+# Unless required by applicable law or otherwise agreed to in writing by the parties,
+# software distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#
+#
+#
+
+# List of nodes to use as control host role
+# Each list item contains:
+#    name: name of a node in the inventory
+#    control_ip_netmask: CIDR address on Control Plane network.  Choose a value outside the DHCP range.
+#    other optional ad hoc variables: these variables can be refered with "{{ host.<variable> }}"
+#        external_ip_netmask:  address on an infrastructure network 
+control_host_nodes:
+  - name: "control-host001"
+    control_ip_netmask: "192.168.213.5/24"
+    #external_ip_netmask: "10.10.10.4/16"
+  #- name: "control-host002"
+    #control_ip_netmask: "192.168.213.6/24"
+    #external_ip_netmask: "10.10.10.5/16"
+  #- name: "control-host003"
+    #control_ip_netmask: "192.168.213.7/24"
+    #external_ip_netmask: "10.10.10.6/16"
+
+# Template for network layout on all control host nodes
+# This follows the os-net-config syntax
+# See https://github.com/openstack/os-net-config/tree/stable/queens
+control_host_nodes_network_config:
+  - type: ovs_bridge
+    name: br-eno1
+    use_dhcp: true
+    mtu: 9000
+    members:
+      -
+        type: interface
+        name: enp3s0f1
+  - type: ovs_bridge
+    name: br-eno2
+    use_dhcp: false
+    mtu: 9000
+    members:
+      -
+        type: interface
+        name: enp129s0f0 
+        mtu: 9000
+
+  - type: ovs_bridge
+    name: br-eno3
+    use_dhcp: false
+    mtu: 9000
+    members:
+      -
+        type: interface
+        name: enp129s0f1 
+        mtu: 9000
+
+control_hosts:
+  # The mapping from control host interfaces to the control VM interfaces
+  # The first interface (eth0) must always be the Control Plane network to allow the VM to PXE boot
+  # VM interface names must be sequential with no gaps (e.g. eth0, eth1, eth2,...)
+  vm_interfaces:
+    - interface: eth0
+      bridge: br-eno1
+    - interface: eth1
+      bridge: br-eno2
+    - interface: eth2
+      bridge: br-eno3
